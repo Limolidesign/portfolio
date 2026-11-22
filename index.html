@@ -225,6 +225,78 @@ body.mm-lock{overflow:hidden}
 @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .mm .shake{animation:shake .35s}
 @media(prefers-reduced-motion:reduce){.mm,.mm-card{transition:none}.mm .shake{animation:none}}
+/* experience timeline */
+.hl-go{cursor:pointer}.hl-go:focus-visible{outline:2px solid #000;outline-offset:3px}
+.hl-l{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hl-go{position:relative}.hl-arw{position:absolute;top:clamp(16px,1.8vw,26px);right:clamp(16px,1.8vw,26px);color:#000;opacity:0;transform:translate(-6px,6px);transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}.hl-go:hover .hl-arw,.hl-go:focus-visible .hl-arw{opacity:1;transform:none}@media(hover:none){.hl-arw{opacity:1;transform:none}}
+.tlm{position:fixed;inset:0;z-index:210;display:grid;place-items:center;padding:16px;background:var(--shade-3);-webkit-backdrop-filter:grayscale(1) blur(6px);backdrop-filter:grayscale(1) blur(6px);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.tlm.open{opacity:1;visibility:visible;transition:opacity .35s}
+.tlm-card{outline:0;position:relative;width:min(1180px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;color:#000;border-radius:var(--r-card);padding:clamp(22px,4vw,48px);transform:translateY(22px) scale(.98);transition:transform .5s cubic-bezier(.2,.8,.2,1);box-shadow:0 30px 80px var(--shade-2)}
+.tlm.open .tlm-card{transform:none}
+.tlm-card h2{font-size:var(--t2);margin:0 0 6px;padding-right:44px}
+.tlm-card .sub{margin:0 0 clamp(26px,4vw,48px);color:var(--muted)}
+.tl{position:relative;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:clamp(14px,2vw,28px);padding-top:34px}
+.tl::before,.tl::after{content:"";position:absolute;top:9px;left:0;height:2px;border-radius:2px}
+.tl::before{right:0;background:var(--line)}
+.tl::after{width:100%;background:#000;transform:scaleX(0);transform-origin:left}
+.tlm.open .tl::after{transform:scaleX(1);transition:transform 1.6s cubic-bezier(.65,0,.25,1) .25s}
+.tl-i{position:relative;display:grid;grid-template-rows:auto 1fr;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.tlm.open .tl-i{opacity:1;transform:none;transition-delay:calc(.45s + var(--i)*.35s)}
+.tl-i::before{content:"";position:absolute;top:-34px;left:0;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #000;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.tlm.open .tl-i::before{transform:scale(1);transition-delay:calc(.4s + var(--i)*.35s)}
+.tl-i.now::after{content:"";position:absolute;top:-28px;left:6px;width:8px;height:8px;border-radius:50%;background:#000;animation:tlp 1.8s ease-out infinite}
+@keyframes tlp{0%{box-shadow:0 0 0 0 rgba(0,0,0,.45)}100%{box-shadow:0 0 0 14px rgba(0,0,0,0)}}
+.tl-y{font-size:var(--t-1);font-weight:var(--w-ui);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-variant-numeric:tabular-nums}
+.tl-c{border-radius:var(--r-card);background:var(--tint);padding:clamp(16px,1.8vw,24px);display:grid;gap:14px;align-content:start;min-height:200px;box-sizing:border-box}
+.tl-lg{width:56px;height:56px;border-radius:14px;background:#fff;display:grid;place-items:center;overflow:hidden;font-family:var(--display);font-weight:900;font-size:20px;box-shadow:inset 0 0 0 1px var(--shade-1)}
+.tl-lg.bx{width:64px;height:64px;padding:0;justify-self:start;box-shadow:inset 0 0 0 1px var(--shade-1)}.tl-lg.bx img{max-width:none;max-height:none;height:auto}.tl-lg.wd{width:auto;height:56px;justify-self:start;border-radius:0;background:none;box-shadow:none;overflow:visible}.tl-lg.wd img{max-width:none;max-height:none;width:150px;height:auto}.tl-lg.wd.tk img{width:92px}.tl-lg.dk{background:#000}.tl-lg img{display:block;max-width:78%;max-height:70%;object-fit:contain}.tl-lg.fl img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:cover}
+.tl-c h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(15px,1.5vw,19px);line-height:1.1;margin:0}
+.tl-r{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.tl-r li{font-size:var(--t0);line-height:1.35}.tl-r small{display:block;font-size:var(--t-1);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);font-weight:var(--w-ui)}
+@media(max-width:860px){.tl{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(260px,76%);overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.tl::before,.tl::after{right:auto;width:calc(var(--n,4)*100%)}.tl-i{scroll-snap-align:start}.tl-hs{display:block!important}}
+.tl-hs{display:none;margin:14px 0 0;font-size:var(--t-1);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);font-weight:var(--w-ui)}
+@media(prefers-reduced-motion:reduce){.tlm,.tlm-card,.tl-i,.tl-i::before,.tl::after{transition:none!important}.tl-i.now::after{animation:none}.tl::after{transform:scaleX(1)}.tl-i,.tl-i::before{opacity:1;transform:none}}
+
+/* launches modal */
+.lc{display:grid}
+.lc-i{display:grid;grid-template-columns:44px minmax(150px,230px) minmax(0,1fr);gap:8px 20px;align-items:center;padding:clamp(12px,1.6vw,18px) 0;border-top:1px solid #000;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.lc-i:last-child{border-bottom:1px solid #000}
+.tlm.open .lc-i{opacity:1;transform:none;transition-delay:calc(.25s + var(--i)*.14s)}
+.lc-n{font:900 13px/1 var(--display);letter-spacing:-.02em;color:var(--muted)}
+.lc-i h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(14px,1.5vw,19px);line-height:1.1;margin:0;display:grid;gap:6px}
+.lc-i h3 small{font:600 10px/1 var(--text);letter-spacing:.1em;color:var(--muted)}
+.lc-i ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.lc-i li{padding:8px 12px;border-radius:var(--r-chip);box-shadow:inset 0 0 0 1px #000;font:600 11px/1.2 var(--text);letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:700px){.lc-i{grid-template-columns:28px minmax(0,1fr);padding:11px 0}.lc-i ul{grid-column:2;gap:6px}.lc-i li{padding:6px 9px;font-size:9.5px}.lc-n{align-self:start;padding-top:3px}}
+@media(max-width:700px){#lcm .tlm-card{padding:20px 14px}#lcm h2{font-size:clamp(17px,5.4vw,22px);margin-bottom:4px}#lcm .sub{margin-bottom:12px;font-size:12px}.lc-i{padding:9px 0;gap:6px 10px}.lc-i h3{font-size:13px;gap:4px}.lc-i ul{gap:5px}.lc-i li{padding:5px 7px;font-size:9px;letter-spacing:.06em}}
+@media(prefers-reduced-motion:reduce){.lc-i{transition:none!important;opacity:1;transform:none}}
+/* testimonials modal */
+.ts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,36px)}
+.ts-i{margin:0;display:flex;flex-direction:column;gap:16px;padding-top:18px;border-top:2px solid #000;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.tlm.open .ts-i{opacity:1;transform:none;transition-delay:calc(.25s + var(--i)*.18s)}
+.ts-q{color:#000}
+.ts-i blockquote{margin:0;font-size:clamp(14px,1.15vw,16px);line-height:1.55;color:#000;text-wrap:pretty}
+.ts-i figcaption{margin-top:auto;display:grid;gap:3px}.ts-i figcaption b{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:13px;line-height:1.15}.ts-i figcaption span{font-size:var(--t-1);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);font-weight:var(--w-ui)}
+@media(max-width:860px){.ts{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ts-i{transition:none!important;opacity:1;transform:none}}
+/* timeline: line in the center, cards alternate above and below, no scrolling */
+.tl{--W:31%;grid-template-columns:100%;grid-template-rows:auto 32px auto;grid-auto-flow:row;gap:0;padding:0;overflow:visible;scroll-snap-type:none}
+.tl::before,.tl::after{grid-column:1;grid-row:2;align-self:center;position:static;top:auto;left:auto;right:auto;width:100%;height:2px}
+.tl-hs{display:none!important}
+.tl-i{grid-column:1;display:flex;justify-self:start;width:var(--W);margin-left:calc(18% + var(--i)*16% - var(--W)/2);scroll-snap-align:none}
+.tl-i:nth-child(odd){grid-row:1;align-self:end;flex-direction:column-reverse}
+.tl-i:nth-child(even){grid-row:3;align-self:start;flex-direction:column}
+.tl-i::before{top:auto;left:calc(50% - 10px)}
+.tl-i:nth-child(odd)::before{bottom:-26px}.tl-i:nth-child(even)::before{top:-26px}
+.tl-i.now::after{top:auto;left:calc(50% - 4px)}
+.tl-i.now:nth-child(odd)::after{bottom:-20px}.tl-i.now:nth-child(even)::after{top:-20px}
+.tl-y{text-align:center;margin:6px 0;font-size:11px;line-height:1.2}
+.tl-c{padding:4px;gap:8px;min-height:0;justify-items:center;text-align:center;background:none;border-radius:0}
+.tl-lg.bx{justify-self:center}.tl-r{justify-items:center}.tl-r li{text-align:center}
+.tl-c h3{font-size:clamp(11px,1.15vw,15px)}
+.tl-r{gap:4px}.tl-r li{font-size:clamp(11px,1.05vw,13px);line-height:1.3}.tl-r small{font-size:9px}
+@media(max-height:700px){.tlm-card{padding-top:16px;padding-bottom:16px}.tlm-card h2{font-size:clamp(20px,5.5vw,28px)}.tlm-card .sub{margin-bottom:10px;font-size:12px}}
+@media(max-width:600px){.tl{--W:33%}.tl-c{padding:2px}.tl-c h3{font-size:10.5px}.tl-r li{font-size:11px}.tl-y{font-size:10px;letter-spacing:.04em}.tlm-card{padding:22px 14px}}
 /* content: Instagram reels + LinkedIn posts */
 .content{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,96px) clamp(56px,8vw,112px)}
 .content .head{grid-template-columns:1fr;gap:12px}
@@ -332,6 +404,40 @@ a.lpost:hover .lt{color:var(--on-dark-2)}
 .p-grid .project:nth-child(odd):last-child .p-did{grid-column:2;grid-row:1;justify-self:end;text-align:right;white-space:nowrap;margin-top:0}
 .p-grid .project:nth-child(odd):last-child .p-type{grid-column:2;grid-row:2;justify-self:end;text-align:right;align-self:end}
 @media(max-width:860px){.p-grid{grid-template-columns:1fr}.p-grid .project:nth-child(odd):last-child .p-box,.p-grid .p-box{aspect-ratio:4/3}.p-grid .project:nth-child(odd):last-child .p-info{grid-template-columns:1fr}.p-grid .project:nth-child(odd):last-child .p-info>*{grid-column:1!important;grid-row:auto!important;text-align:left!important;justify-self:start!important;white-space:normal!important}.p-grid .project:nth-child(odd):last-child .p-info h3{order:1}.p-grid .project:nth-child(odd):last-child .p-info p{order:2}.p-grid .project:nth-child(odd):last-child .p-did{order:3;margin-top:6px}.p-grid .project:nth-child(odd):last-child .p-type{order:4}}
+
+/* Projects: sticky stack, 16:10 cards on desktop, vertical on mobile */
+#projects .p-grid{display:grid;grid-template-columns:1fr;gap:0;padding-bottom:8px}
+#projects .p-grid .project{position:sticky;top:calc(92px + var(--k,0)*14px);width:min(100%,calc((100svh - 150px)*1.6));margin:0 auto 28px;aspect-ratio:16/10;display:grid;grid-template-columns:1fr;border-radius:var(--r-card);overflow:hidden;background:var(--c);color:var(--f);box-shadow:0 -10px 32px rgba(0,0,0,.14);padding:0;border:0;min-width:0}
+#projects .p-grid .project:nth-child(2){--k:1}#projects .p-grid .project:nth-child(3){--k:2}#projects .p-grid .project:nth-child(4){--k:3}
+#projects .p-grid .project .p-box{aspect-ratio:auto;height:100%;border-radius:0;transform:none!important;box-shadow:none!important;clip-path:none!important;background:var(--c);min-height:0}
+#projects .p-grid .project .p-box::after,#projects .p-grid .project .p-box .btn{display:none}
+#projects .p-grid .project .p-box{position:absolute;inset:0}
+#projects .p-grid .project .p-info{position:absolute;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,28px);width:min(400px,44%);display:flex;flex-direction:column;gap:14px;margin:0;padding:clamp(18px,2vw,28px);min-width:0;background:var(--c);color:var(--f);border-radius:calc(var(--r-card) - 4px);z-index:1}
+#projects .p-grid .project .p-info>*{text-align:left!important;justify-self:auto!important;white-space:normal!important;order:0!important;margin:0!important;color:inherit}
+#projects .p-grid .project .p-ix{font-weight:700;letter-spacing:.08em}
+#projects .p-grid .project .p-info h3{font-size:clamp(20px,2.4vw,32px);line-height:1.02}
+#projects .p-grid .project .p-did{opacity:.85}
+#projects .p-grid .project .p-type{display:none}
+#projects .p-grid .project .p-go{text-decoration:none;font-weight:700;display:inline-flex;gap:8px}
+#projects .p-grid .project .p-go::after{content:"";position:absolute;inset:0;z-index:2}
+#projects .p-grid .project .p-go span{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+#projects .p-grid .project:hover .p-go span{transform:translateX(6px)}
+#projects .p-grid .project:hover .p-box img{transform:scale(1.025)}
+@media(max-width:760px){
+ #projects .p-grid .project{width:100%;aspect-ratio:4/5;max-height:calc(100svh - 120px);top:calc(84px + var(--k,0)*12px);margin-bottom:20px}
+ #projects .p-grid .project .p-box{position:absolute;inset:0 0 auto 0;height:68%;aspect-ratio:auto}
+ #projects .p-grid .project .p-info{left:10px;right:10px;bottom:10px;width:auto;padding:16px 18px;gap:10px}
+ #projects .p-grid .project .p-info h3{font-size:clamp(20px,6vw,26px)}
+}
+@media all{
+ #projects .p-grid .project .p-info{color:#fff;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));-webkit-backdrop-filter:blur(26px) saturate(1.35);backdrop-filter:blur(26px) saturate(1.35);border:1px solid rgba(255,255,255,.17);box-shadow:inset 0 1px 0 rgba(255,255,255,.27),inset 0 -1px 0 rgba(255,255,255,.05),0 18px 40px rgba(0,0,0,.22);overflow:hidden}
+ #projects .p-grid .project .p-info::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+ #projects .p-grid .project .p-info::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 80% at 0% 0%,rgba(255,255,255,.135),transparent 55%)}
+ #projects .p-grid .project .p-ix,#projects .p-grid .project .p-info h3,#projects .p-grid .project .p-did{position:relative;z-index:1;color:#fff}
+ #projects .p-grid .project .p-did{opacity:1}
+ #projects .p-grid .project .p-go{color:#fff;position:static}
+}
+@media(prefers-reduced-motion:reduce){#projects .p-grid .project{position:relative;top:auto}}
 
 /* statement */
 .about-sticky{display:flex;flex-direction:column;gap:clamp(24px,4vw,40px)}
@@ -445,7 +551,24 @@ html.go .hero .row,html.go .hero .hair,html.go .hero .meta{opacity:1;transition:
 @media(prefers-reduced-motion:reduce){.js .hero h1 .tw,.js .hero .row,.js .hero .hair,.js .hero .meta{opacity:1}html.go .hero h1 .tw{animation:none}#intro{display:none!important}}
 
 /* personal series */
-.projects.personal{border-top:0;padding-top:0}
+.projects.personal{border-top:0;padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(32px,4vw,56px)}.personal .head{margin-bottom:clamp(20px,3vw,36px)}
+
+/* Just for Fun: color card carousels */
+.jf-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.jf-nv{display:flex;gap:8px}.jf-nv button{width:44px;height:44px;border-radius:var(--r-ui,12px);border:1px solid #000;background:#fff;color:#000;font:inherit;font-size:16px;cursor:pointer;transition:background .2s,color .2s}.jf-nv button:hover{background:#000;color:#fff}
+.ar{flex:none;display:inline-block;vertical-align:-1px}.ar-p{transform:rotate(-135deg)}.ar-n{transform:rotate(45deg)}.jf-nv button{display:inline-flex;align-items:center;justify-content:center;padding:0}.crow .lf .ar{margin-left:4px}
+.jf-g+.jf-g{margin-top:64px}
+.jf-gh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;margin-bottom:16px}.jf-gh h3{font-size:var(--t1);line-height:var(--lh-display)}.jf-gh p{margin:0;color:var(--muted)}
+.jf-rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);scrollbar-width:none}.jf-rail::-webkit-scrollbar{display:none}
+#personal .jf-c{flex:0 0 clamp(260px,52%,560px);scroll-snap-align:start;display:grid;grid-template-rows:auto 1fr;gap:0;border-radius:var(--r-card);overflow:hidden;background:var(--c);color:var(--f)}
+#personal .jf-c img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:0;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+#personal .jf-c:hover img{transform:scale(1.03)}
+.jf-c{position:relative}.jf-c .jf-m{overflow:hidden}
+.jf-i{padding:16px;display:grid;gap:8px;align-content:space-between;min-height:132px}
+#personal .jf-c h4{color:inherit;font-size:var(--t1)}
+.jf-i{position:relative}.jf-og{position:absolute;right:16px;top:16px;display:grid;gap:6px;justify-items:center}.jf-ot{width:44px;height:44px;border-radius:var(--r-ui,12px);background:#fff;padding:5px;display:flex;align-items:center;justify-content:center;overflow:hidden}.jf-ot img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}.jf-og .label{font-size:10px;opacity:.85}#personal .jf-c h4{padding-right:64px}.jf-ot.w{width:104px;height:44px;padding:6px 8px}.jf-i:has(.jf-ot.w) h4{padding-right:116px}.jf-og{justify-items:end}.jf-ot img{object-fit:contain!important}@media(max-width:600px){.jf-ot.w{width:88px}.jf-i:has(.jf-ot.w) h4{padding-right:96px}#personal .jf-c h4{font-size:15px}}
+.jf-r{display:flex;justify-content:space-between;align-items:center;gap:8px}.jf-r svg{flex:none;transition:transform .35s cubic-bezier(.2,.8,.2,1)}.jf-c:hover .jf-r svg{transform:translate(3px,-3px)}
+@media(max-width:600px){.jf-nv{display:none}#personal .jf-c{flex-basis:82%}}
 .pser{display:grid;gap:clamp(14px,2vw,24px);padding-block:clamp(24px,4vw,56px) 0}
 .pser-m{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px clamp(16px,3vw,40px)}
 .pser-m h3{font-size:var(--t1);line-height:var(--lh-display)}
@@ -465,8 +588,75 @@ html{background:var(--dark)}
 .portrait>img:first-child{position:absolute;inset:0;width:100%;height:100%;max-width:none}
 @media(max-width:860px){.about-left{justify-items:center}.about-left>.portrait{width:min(100%,320px)}.portrait{margin-bottom:clamp(64px,18vw,84px)}.about .btn.dl{margin-top:0;width:100%;max-width:100%;box-sizing:border-box;justify-self:stretch}}
 .ps-box{border-radius:var(--r-card);background:repeating-linear-gradient(135deg,#dcdcd8 0 9px,#e9e9e6 9px 18px);aspect-ratio:16/9}
+
+/* hero: knockout zoom (scroll-driven) */
+.hero{--hph:100vh;--p:0;display:block;overflow:visible;height:calc(var(--hph)*4.6);background:var(--dark)}
+@supports(height:100svh){.hero{--hph:100svh}}
+.hero-pin{position:sticky;top:0;height:var(--hph);overflow:hidden;background:var(--dark) url(assets/hero-gradient.jpg) center/cover no-repeat;isolation:isolate}
+.hero-pin .hero-video{object-position:center}
+.hero h1.sr-only,.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0;padding:0}
+.ko{position:absolute;inset:0;z-index:3;background:#000;mix-blend-mode:multiply;display:grid;place-items:center;opacity:calc(1 - clamp(0,(var(--p) - .7)*5,1));pointer-events:none}
+.ko-s{display:block;width:95vw;height:auto;overflow:visible}
+.ko-g{transform:scale(calc(1 + var(--p)*var(--p)*80));transform-origin:2211px -333px}
+.ko-end{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(clamp(70px,10vh,96px) + 28px) var(--gutter) calc(clamp(70px,10vh,100px) - 28px);font-family:var(--display);font-weight:var(--w-display);text-transform:uppercase;letter-spacing:-.04em;line-height:1;color:#fff;font-size:min(5.6vw,9vh);pointer-events:none}
+.ko-end>span{display:block;text-shadow:0 4px 50px rgba(0,0,0,.55);opacity:clamp(0,(var(--p) - .72)*8,1);transform:scale(calc(.92 + clamp(0,(var(--p) - .72)*6,1)*.08))}
+.hero .ko-end p{margin:clamp(16px,2.8vh,24px) auto 0;max-width:min(100%,600px);text-align:center;text-wrap:pretty;font-family:var(--text);font-weight:400;text-transform:none;letter-spacing:0;line-height:1.5;font-size:var(--t0);text-shadow:0 1px 18px rgba(0,0,0,.45);opacity:clamp(0,(var(--p) - .8)*10,1);transform:translateY(calc((1 - clamp(0,(var(--p) - .8)*10,1))*26px))}
+.ko-f{position:absolute;z-index:6;left:var(--gutter);right:var(--gutter);bottom:clamp(22px,2.8vw,32px);color:#fff}
+.ko-f .hair{height:1px;background:var(--on-dark-2)}
+.ko-f .meta{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px 24px;margin-top:14px}
+.ko-f .meta .label:last-child{text-align:right}
+.ko-f .meta .ar{display:block;overflow:visible;animation:cpcue 1.6s ease-in-out infinite}
+@keyframes cpcue{50%{transform:translateY(4px)}}
+.js .hero .meta,.js .hero .hair{opacity:1}
+@media(max-width:720px){.ko-end{font-size:min(8.4vw,9vh)}.ko-end span{display:inline}.ko-end{text-wrap:balance}.ko-f .meta .label:first-child{visibility:visible}}
+@media(max-width:600px),(hover:none) and (pointer:coarse){.hero{height:calc(var(--hph)*3.8)}}
+@media(prefers-reduced-motion:reduce){.hero{height:var(--hph);--p:1}.ko-f .meta .ar{animation:none}}
+
+
+/* hero tiles: frosted glass */
+.ko-end .hl{width:min(1000px,85%);margin:clamp(40px,7.2vh,64px) auto 0;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.1vw,14px);text-align:left;font-family:var(--text);font-weight:400;letter-spacing:0;line-height:1.4;text-transform:none;font-size:var(--t0);text-shadow:none}
+.ko-end .hl-t{--k:0;position:relative;color:#fff;aspect-ratio:1/1;min-height:0;padding:clamp(14px,1.6vw,22px);gap:12px;pointer-events:none;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));-webkit-backdrop-filter:blur(26px) saturate(1.35);backdrop-filter:blur(26px) saturate(1.35);border:1px solid rgba(255,255,255,.17);box-shadow:inset 0 1px 0 rgba(255,255,255,.27),inset 0 -1px 0 rgba(255,255,255,.05),0 18px 40px rgba(0,0,0,.22);overflow:hidden;opacity:clamp(0,(var(--p) - .86 - var(--k)*.02)*12,1);transform:translateY(calc((1 - clamp(0,(var(--p) - .86 - var(--k)*.02)*12,1))*30px))}
+.ko-end .hl-t:nth-child(2){--k:1}.ko-end .hl-t:nth-child(3){--k:2}.ko-end .hl-t:nth-child(4){--k:3}
+.hero.hl-on .ko-end .hl-t{pointer-events:auto}
+.hero.hl-on .ko{display:none}
+.ko-end .hl-t::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.ko-end .hl-t::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 80% at 0% 0%,rgba(255,255,255,.135),transparent 55%)}
+.ko-end .hl-t>*{position:relative;z-index:1}
+.ko-end .hl-l{color:rgba(255,255,255,.72)}
+.ko-end .hl-v,.ko-end .hl-v small,.ko-end .hl-c{color:#fff}
+.ko-end .hl-c span{opacity:.65}
+.ko-end .hl .dm i{background:#fff}
+.ko-end .hl-arw{color:#fff}
+.ko-end .hl-go:focus-visible{outline-color:#fff}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.ko-end .hl-t{background:rgba(20,20,22,.55)}}
+@media(max-width:1100px) and (min-width:601px){.ko-end .hl{width:min(1000px,94%)}.ko-end .hl-b>div:not(.hl-v){display:none}}
+@media(max-width:600px){.ko-end .hl{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,480px)}}
+@media(max-width:860px) and (min-width:601px){.ko-end .hl{gap:8px}.ko-end .hl-t{padding:12px;gap:8px}.ko-end .hl-l,.ko-end .hl-c{font-size:9.5px}.ko-end .hl-v small{font-size:9.5px}.ko-end .hl-c span{display:block}}
+@media(max-width:600px){.ko-end{font-size:min(8vw,5.4vh)}.ko-end .hl-b>div:not(.hl-v){display:none}.ko-end .hl-t{padding:12px;gap:8px}.ko-end .hl-l,.ko-end .hl-c{font-size:10px}.ko-end .hl-v small{font-size:10px}.ko-end .hl-c span{display:block}}
+@media(prefers-reduced-motion:reduce){.hero .ko-end .hl-t{pointer-events:auto}}
+
+/* hero refinements */
+.ko-end>span.ko-sub{font-family:var(--text);font-weight:600;font-size:var(--t-1);letter-spacing:var(--ls-label);line-height:1;margin-bottom:clamp(14px,2.1vh,20px);text-shadow:none;color:rgba(255,255,255,.82)}
+.ko-end>span:not(.ko-sub){line-height:.98}
+.ko-end .hl-t{container-type:inline-size;transition:none}
+.ko-end .hl-v{display:block;font-size:clamp(46px,39cqw,150px);line-height:.86;letter-spacing:-.06em;white-space:nowrap}
+.ko-end .hl-v small{display:block;margin-top:8px;font-size:11px;letter-spacing:var(--ls-label);line-height:1.2;opacity:.8}
+.ko-end .hl-b{gap:12px}
+.ko-end .hl-b>div:not(.hl-v){display:none}
+.ko-cta{align-self:center;display:inline-flex;align-items:center;gap:8px;margin-top:clamp(28px,4.6vh,40px);color:#fff;text-decoration:none;font-family:var(--text);font-weight:var(--w-ui);font-size:var(--t-1);letter-spacing:var(--ls-label);text-transform:uppercase;line-height:1;pointer-events:none;text-shadow:none;opacity:clamp(0,(var(--p) - .8)*10,1);transform:translateY(calc((1 - clamp(0,(var(--p) - .8)*10,1))*26px))}
+.ko-cta img{width:56px;height:56px;border-radius:var(--r-ui);object-fit:cover;display:block;box-shadow:0 0 0 1px rgba(255,255,255,.4),0 10px 30px rgba(0,0,0,.3)}
+.ko-cta span{display:inline-flex;align-items:center;height:56px;padding:0 26px;border-radius:var(--r-ui);background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 10px 30px rgba(0,0,0,.3);transition:background .3s}
+.ko-cta:hover span{background:#141414}
+.hero.hl-on .ko-cta{pointer-events:auto}.ko-cta:hover{box-shadow:0 14px 38px rgba(0,0,0,.4)}.ko-cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.hero .ko-cta{pointer-events:auto}}
+@media(min-width:601px) and (max-height:800px){.ko-end{padding-top:calc(clamp(70px,10vh,96px) + 14px);padding-bottom:calc(clamp(70px,10vh,100px) - 14px)}.hero .ko-end p{margin-top:16px}.ko-cta{margin-top:26px}.ko-end .hl{margin-top:34px}.ko-end .hl-t{aspect-ratio:auto;height:clamp(200px,27vh,232px)}}
+@media(max-width:600px){.ko-end .ko-ar{display:none}.ko-end{padding-top:94px;padding-bottom:14px}.ko-cta{margin-top:14px}.ko-end .hl{margin-top:16px}}
+@media(max-width:600px) and (max-height:720px){.ko-end>span.ko-sub{display:none}.ko-end{padding-top:80px}.ko-end .hl{gap:8px}.ko-end .hl-t{padding:10px;aspect-ratio:auto;height:146px}.ko-end{font-size:min(7vw,4.6vh)}.ko-end .hl-v{font-size:clamp(34px,30cqw,60px)}.ko-end .hl-v small{margin-top:4px}.ko-end .hl-b{gap:6px}}
+.ko-end .hl-l{position:static}
+.ko-ar{display:block;margin-top:clamp(18px,3.4vh,32px);overflow:visible;animation:cpcue 1.6s ease-in-out infinite;opacity:clamp(0,(var(--p) - .9)*12,1)}@media(prefers-reduced-motion:reduce){.ko-ar{animation:none}}
+.ko-end .hl-arw{z-index:3;top:clamp(12px,1.3vw,18px);right:clamp(12px,1.3vw,18px);width:32px;height:32px}
 </style>
-<script>(function(){var d=document.documentElement;try{var seen=false;try{seen=sessionStorage.getItem("limoliIntro")==="1"&&!/[?&]r=/.test(location.search)}catch(e){}if(seen||matchMedia("(prefers-reduced-motion:reduce)").matches){d.classList.add("go","hi-in")}else{d.classList.add("intro");try{sessionStorage.setItem("limoliIntro","1")}catch(e){}}}catch(e){}})();</script>
+<script>(function(){var d=document.documentElement;try{var seen=false;try{seen=(sessionStorage.getItem("limoliIntro")==="1"&&!/[?&]r=/.test(location.search))||location.hash==="#back"}catch(e){}if(seen||matchMedia("(prefers-reduced-motion:reduce)").matches){d.classList.add("go","hi-in")}else{d.classList.add("intro");try{sessionStorage.setItem("limoliIntro","1")}catch(e){}}}catch(e){}})();</script>
 </head>
 <body>
 <div id="intro" aria-hidden="true">
@@ -487,20 +677,19 @@ html{background:var(--dark)}
 </nav>
 
 <header class="hero" id="top">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero.jpg" aria-hidden="true" tabindex="-1"><source src="assets/hero.webm" type="video/webm"><source src="assets/hero.mp4" type="video/mp4"></video>
-  <div class="wrap pad">
-    <div class="top">
-      <h1 aria-label="I build visuals people remember.">
-        <span class="ttl" aria-hidden="true"><span class="tw" style="--i:0">I</span> <span class="tw" style="--i:1">build</span> <span class="tw" style="--i:2">visuals</span> <span class="tw" style="--i:3">people</span> <span class="tw" style="--i:4">remember.</span></span>
-      </h1>
-      <div class="row">
-        <p>I’m a graphic and brand designer for in-house teams. I learn what a team is really trying to say, turn it into clear visual work, and explain the why behind every choice.</p>
-      </div>
+  <div class="hero-pin">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-gradient.jpg" aria-hidden="true" tabindex="-1"><source src="assets/hero-gradient-web.mp4" type="video/mp4"></video>
+    <h1 class="sr-only">Building visuals people remember</h1>
+    <div class="ko" aria-hidden="true"><svg class="ko-s" viewBox="87 -674 4249 681" focusable="false"><path class="ko-g" fill="#fff" d="M751 -167V0H87V-667H290V-167Z M814.0 0V-667H1017.0V0Z M2079.0 0V-508L1785.0 0H1622.0L1331.0 -508V0H1140.0V-667H1463.0L1708.0 -225L1950.0 -667H2271.0V0Z M2825.0 -674 2987.0 -673Q3165.0 -673 3230.5 -614.0Q3296.0 -555 3296.0 -378V-346Q3296.0 -138 3244.0 -67.5Q3192.0 3 2981.0 3L2828.0 6L2764.0 7L2626.0 2Q2510.0 2 2447.0 -50.5Q2384.0 -103 2384.0 -220L2382.0 -343Q2382.0 -546 2434.0 -608.5Q2486.0 -671 2681.0 -671ZM2715.0 -159 2824.0 -157 2928.0 -158Q3014.0 -158 3051.5 -176.5Q3089.0 -195 3089.0 -268L3091.0 -358Q3091.0 -404 3085.5 -436.5Q3080.0 -469 3063.0 -484.5Q3046.0 -500 3012.5 -505.0Q2979.0 -510 2941.0 -510L2739.0 -509Q2670.0 -509 2634.0 -495.0Q2598.0 -481 2592.5 -435.5Q2587.0 -390 2587.0 -360V-342V-315Q2587.0 -223 2608.5 -191.0Q2630.0 -159 2715.0 -159Z M4070.0 -167V0H3406.0V-667H3609.0V-167Z M4133.0 0V-667H4336.0V0Z"/></svg></div>
+    <div class="ko-end"><span class="ko-sub">Graphic and brand designer</span><span aria-hidden="true">Building visuals</span> <span aria-hidden="true">people remember</span><p>I’m a graphic and brand designer for in-house teams. I learn what a team is really trying to say, turn it into clear visual work, and explain the why behind every choice.</p>
+      <a class="ko-cta" href="mailto:joe@limolidesign.com"><img src="assets/joe-avatar.jpg" width="56" height="56" alt="" loading="eager"><span>Contact Me</span></a>
+      <div class="hl" aria-label="Highlights">
+      <div class="hl-t hl-go" id="tl-open" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Experience, 7 plus years. Open work timeline"><span class="hl-l">Experience<svg class="hl-arw" width="40" height="40" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 26L26 4M8 4h18v18"/></svg></span><div class="hl-b"><div class="hl-v"><span data-to="7">7</span>+<small>Yrs</small></div><div class="g-y"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="hl-c">Since 2019<br><span>Boston, MA</span></span></div>
+      <div class="hl-t hl-go" id="id-go" role="link" tabindex="0" aria-label="Identity systems, 25 plus brands. Go to projects"><span class="hl-l">Identity systems<svg class="hl-arw" width="40" height="40" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 26L26 4M8 4h18v18"/></svg></span><div class="hl-b"><div class="hl-v"><span data-to="25">25</span>+<small>Brands</small></div></div><span class="hl-c">Limoli Design<br><span>2021 to now</span></span></div>
+      <div class="hl-t hl-go" id="ts-open" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Testimonials, 30 quotes. Read client testimonials"><span class="hl-l">Testimonials<svg class="hl-arw" width="40" height="40" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 26L26 4M8 4h18v18"/></svg></span><div class="hl-b"><div class="hl-v"><span data-to="30">30</span><small>Quotes</small></div></div><span class="hl-c">Clients and employers<br><span>On the case studies</span></span></div>
+      <div class="hl-t hl-go" id="lc-open" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Launches, 8 products. See what I designed on each launch"><span class="hl-l">Launches<svg class="hl-arw" width="40" height="40" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M4 26L26 4M8 4h18v18"/></svg></span><div class="hl-b"><div class="hl-v"><span data-to="8">8</span><small>Products</small></div><div class="g-s"><i style="animation-delay:0.0s"></i><i style="animation-delay:0.1s"></i><i style="animation-delay:0.2s"></i><i style="animation-delay:0.3s"></i><i style="animation-delay:0.4s"></i><i style="animation-delay:0.5s"></i><i style="animation-delay:0.6s"></i><i style="animation-delay:0.7s"></i></div></div><span class="hl-c">REEKON Tools<br><span>Launched with engineers</span></span></div>
     </div>
-    <div>
-      <img class="masks" src="assets/masks-dots.svg" alt="" aria-hidden="true">
-      <div class="hair"></div>
-      <div class="meta"><span class="label">Based in Boston, MA</span><svg class="ar" width="20" height="22" viewBox="0 0 20 22" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><path d="M3 4l7 6 7-6"/><path d="M3 12l7 6 7-6"/></svg><span class="label" style="opacity:.7">Curious by default</span></div>
+    <svg class="ko-ar" width="30" height="33" viewBox="0 0 20 22" fill="none" stroke="#fff" stroke-width="1.5" aria-hidden="true"><path d="M3 4l7 6 7-6"/><path d="M3 12l7 6 7-6"/></svg>
     </div>
   </div>
 </header>
@@ -512,50 +701,32 @@ html{background:var(--dark)}
   </div>
 </div>
 
-<section id="work" class="pad" aria-label="Highlights">
-  <div class="wrap">
-    <div class="head rv"><h2>Highlights</h2></div>
-    <div class="hl rv" aria-label="Highlights">
-      <div class="hl-t"><span class="hl-l">Experience</span><div class="hl-b"><div class="hl-v"><span data-to="7">7</span>+<small>Yrs</small></div><div class="g-y"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="hl-c">Since 2019<br><span>Boston, MA</span></span></div>
-      <div class="hl-t"><span class="hl-l">Identity systems</span><div class="hl-b"><div class="hl-v"><span data-to="25">25</span>+<small>Brands</small></div><div class="dm" data-dm="36"></div></div><span class="hl-c">Limoli Design<br><span>2023 to now</span></span></div>
-      <div class="hl-t"><span class="hl-l">Packaging design</span><div class="hl-b"><div class="hl-v"><span data-to="12">12</span><small>SKUs</small></div><div class="g-c"><i style="--r:0deg"></i><i style="--r:-45deg"></i><i style="--r:90deg"></i><i style="--r:45deg"></i></div></div><span class="hl-c">REEKON Tools<br><span>Designed or redesigned</span></span></div>
-      <div class="hl-t"><span class="hl-l">Launches</span><div class="hl-b"><div class="hl-v"><span data-to="8">8</span><small>Products</small></div><div class="g-s"><i style="animation-delay:0.0s"></i><i style="animation-delay:0.1s"></i><i style="animation-delay:0.2s"></i><i style="animation-delay:0.3s"></i><i style="animation-delay:0.4s"></i><i style="animation-delay:0.5s"></i><i style="animation-delay:0.6s"></i><i style="animation-delay:0.7s"></i></div></div><span class="hl-c">REEKON Tools<br><span>Launched with engineers</span></span></div>
-    </div>
-  </div>
-</section>
+
 
 <section id="projects" class="projects pad" aria-label="Projects">
   <div class="wrap">
     <div class="head rv"><h2>Projects</h2></div>
 
     <div class="p-grid">
-    <article class="project">
-      <a class="p-box" href="the-social-chair.html"><img src="assets/social.jpg" alt="The Social Chair Barber Co. logo on orange with a comb, coffee cup and razor"><video autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/social.webm" type="video/webm"><source src="assets/social.mp4" type="video/mp4"></video><span class="btn">View project <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 6h13M9.5 1.5 14 6l-4.5 4.5"/></svg></span></a>
-      <div class="p-info"><h3>The Social Chair Barber Co.</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Packaging design</span><span class="label soft p-type">Client project</span></div>
+    <article class="project" style="--c:#F26B3A;--f:#000">
+      <a class="p-box" href="the-social-chair.html"><img src="assets/social.jpg" alt="The Social Chair logo on orange with a comb, coffee cup and razor"><video autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/social.webm" type="video/webm"><source src="assets/social.mp4" type="video/mp4"></video><span class="btn">View project <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 6h13M9.5 1.5 14 6l-4.5 4.5"/></svg></span></a>
+      <div class="p-info"><span class="p-ix label">01 / 04</span><h3>The Social Chair</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Packaging design</span><span class="label soft p-type">Client project</span><a class="p-go label" href="the-social-chair.html">View project <svg class="ar ar-n" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></div>
     </article>
 
-    <article class="project">
+    <article class="project" style="--c:#0F1B3D;--f:#fff">
       <a class="p-box" href="kmf-strong.html"><img src="assets/kmf-card.jpg" alt="KMF Strong green arrow logo glitching on a navy screen"><video autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/kmf.webm" type="video/webm"><source src="assets/kmf.mp4" type="video/mp4"></video><span class="btn">View project <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 6h13M9.5 1.5 14 6l-4.5 4.5"/></svg></span></a>
-      <div class="p-info"><h3>KMF Strong Gym</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Apparel and merch</span><span class="label soft p-type">Client project</span></div>
+      <div class="p-info"><span class="p-ix label">02 / 04</span><h3>KMF Strong Gym</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Apparel and merch</span><span class="label soft p-type">Client project</span><a class="p-go label" href="kmf-strong.html">View project <svg class="ar ar-n" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></div>
     </article>
 
-    <article class="project">
+    <article class="project" style="--c:#4A3A2C;--f:#fff">
       <a class="p-box" href="boston-glove-company.html"><img src="assets/bgc.jpg" alt="Canvas and leather tool bag printed with Boston Glove Co. on a job site"><span class="btn">View project <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 6h13M9.5 1.5 14 6l-4.5 4.5"/></svg></span></a>
-      <div class="p-info"><h3>Boston Glove Co.</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Apparel and gear</span><span class="label soft p-type">Client project</span></div>
+      <div class="p-info"><span class="p-ix label">03 / 04</span><h3>Boston Glove Co.</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Apparel and gear</span><span class="label soft p-type">Client project</span><a class="p-go label" href="boston-glove-company.html">View project <svg class="ar ar-n" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></div>
     </article>
 
-    <article class="project">
+    <article class="project" style="--c:#6C7351;--f:#fff">
       <a class="p-box" href="skin-ritual.html"><img src="assets/skin-ritual/sr108.jpg" alt="Two Skin Ritual face wipe pouches, one white and one olive moss, on rumpled linen"><span class="btn">View project <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 6h13M9.5 1.5 14 6l-4.5 4.5"/></svg></span></a>
-      <div class="p-info"><h3>Skin Ritual</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Packaging design</span><span class="label soft p-type">Client project</span></div>
+      <div class="p-info"><span class="p-ix label">04 / 04</span><h3>Skin Ritual</h3><span class="label p-did">Art direction &nbsp;/&nbsp; Brand identity &nbsp;/&nbsp; Packaging design</span><span class="label soft p-type">Client project</span><a class="p-go label" href="skin-ritual.html">View project <svg class="ar ar-n" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></div>
     </article>
-    </div>
-  </div>
-</section>
-
-<section id="personal" class="projects personal pad" aria-label="Personal projects">
-  <div class="wrap">
-    <div class="pser"><div class="pser-m"><h3>Redesign</h3><p>Old, outdated logos get a full brand identity.</p><span class="tk-n"><button type="button" id="tk-p" aria-label="Previous project"><span aria-hidden="true">&larr;</span></button><button type="button" id="tk-x" aria-label="Next project"><span aria-hidden="true">&rarr;</span></button></span></div><div class="rail tick"><div class="tk-track"><div class="tk-set"><a class="pcard" href="brew-zone.html"><div class="pimg sp"><img src="assets/bz/split.jpg" alt="Old Brew Zone keg logo beside the new pint glass logo" loading="lazy" decoding="async"></div><div><h4>Brew Zone</h4><span class="label soft">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span></div></a><a class="pcard" href="lt-electric.html"><div class="pimg sp"><img src="assets/lt/split.jpg" alt="Old LT Electric circle logo beside the new bolt and wordmark" loading="lazy" decoding="async"></div><div><h4>LT Electric</h4><span class="label soft">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span></div></a><a class="pcard" href="choice-fitness.html"><div class="pimg sp"><img src="assets/cf/split.jpg" alt="Old Choice Fitness circle logo beside the new yellow and black CF mark" loading="lazy" decoding="async"></div><div><h4>Choice Fitness</h4><span class="label soft">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span></div></a></div></div></div></div>
-    <div class="pser"><div class="pser-m"><h3>What If&hellip;</h3><p>A brand rebranded for a different industry.</p></div><div class="rail"><a class="pcard" href="five-guys-racing.html"><div class="pimg sp"><img src="assets/fg/split.jpg" alt="Old Five Guys logo beside the new racing team logo" loading="lazy" decoding="async"></div><div><h4>Five Guys &rarr; Racing team</h4><span class="label soft">Identity &nbsp;/&nbsp; Livery &nbsp;/&nbsp; Merch</span></div></a><a class="pcard" href="starbucks-seafood.html"><div class="pimg sp"><img src="assets/sbux/split.jpg" alt="Old Starbucks logo beside the new seafood restaurant logo" loading="lazy" decoding="async"></div><div><h4>Starbucks &rarr; Seafood</h4><span class="label soft">Identity &nbsp;/&nbsp; Menu &nbsp;/&nbsp; Signage</span></div></a></div>
     </div>
   </div>
 </section>
@@ -577,10 +748,18 @@ html{background:var(--dark)}
           <li><b>REEKON Tools</b><span>Senior Graphic Designer</span><span class="label soft">2022 – 2025</span></li>
           <li><b>TAWK Media</b><span>Graphic Designer</span><span class="label soft">2019 – 2022</span></li>
           <li><b>Medica Corp.</b><span>UX/UI Intern</span><span class="label soft">2018 – 2019</span></li>
-          <li><b>Limoli Design</b><span>Identity Designer and Founder, 25+ small businesses</span><span class="label soft">2023 – Now</span></li>
+          <li><b>Limoli Design</b><span>Identity Designer and Founder, 25+ small businesses</span><span class="label soft">2021 – Now</span></li>
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="personal" class="projects personal pad" aria-label="Personal projects">
+  <div class="wrap">
+    <div class="head rv jf-head"><h2>Just for Fun</h2><span class="jf-nv"><button type="button" id="jf-p" aria-label="Previous projects"><svg class="ar ar-p" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></button><button type="button" id="jf-n" aria-label="Next projects"><svg class="ar ar-n" width="18" height="18" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></button></span></div>
+    <div class="jf-g"><div class="jf-gh"><h3>Redesign</h3><p>Old, outdated logos get a full brand identity.</p></div><div class="jf-rail"><a class="pcard jf-c" href="brew-zone.html" style="--c:#05ADE1;--f:#fff"><img src="assets/bz/hero.jpg" alt="Brew Zone window sign with the new pint glass logo" loading="lazy" decoding="async"><div class="jf-i"><span class="jf-og"><span class="jf-ot w"><img src="assets/lg/bz-old.png" alt="Original Brew Zone logo before the redesign" loading="lazy" decoding="async"></span><span class="label">Original</span></span><h4>Brew Zone</h4><div class="jf-r"><span class="label">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></div></div></a><a class="pcard jf-c" href="lt-electric.html" style="--c:#D6F11E;--f:#000"><img src="assets/lt/van-side.jpg" style="object-position:50% 15%" alt="LT Electric work van with the lime lightning bolt pattern and logo" loading="lazy" decoding="async"><div class="jf-i"><span class="jf-og"><span class="jf-ot"><img src="assets/lg/lt-old.png" alt="Original LT Electric logo before the redesign" loading="lazy" decoding="async"></span><span class="label">Original</span></span><h4>LT Electric</h4><div class="jf-r"><span class="label">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></div></div></a><a class="pcard jf-c" href="choice-fitness.html" style="--c:#FFE001;--f:#000"><img src="assets/cf/hero.jpg" alt="Choice Fitness yellow billboard" loading="lazy" decoding="async"><div class="jf-i"><span class="jf-og"><span class="jf-ot"><img src="assets/lg/cf-old.png" alt="Original Choice Fitness logo before the redesign" loading="lazy" decoding="async"></span><span class="label">Original</span></span><h4>Choice Fitness</h4><div class="jf-r"><span class="label">Logo &nbsp;/&nbsp; Identity &nbsp;/&nbsp; Mockups</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></div></div></a></div></div>
+    <div class="jf-g"><div class="jf-gh"><h3>What If&hellip;</h3><p>A brand rebranded for a different industry.</p></div><div class="jf-rail"><a class="pcard jf-c" href="five-guys-racing.html" style="--c:#C31E24;--f:#fff"><img src="assets/fg/hero-flags.jpg" alt="Five Guys racing team flags against a cloudy sky" loading="lazy" decoding="async"><div class="jf-i"><span class="jf-og"><span class="jf-ot w"><img src="assets/lg/fg-old.png" alt="Original Five Guys logo before the redesign" loading="lazy" decoding="async"></span><span class="label">Original</span></span><h4>Five Guys &rarr;<br>Racing team</h4><div class="jf-r"><span class="label">Identity &nbsp;/&nbsp; Livery &nbsp;/&nbsp; Merch</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></div></div></a><a class="pcard jf-c" href="starbucks-seafood.html" style="--c:#1E3932;--f:#fff"><img src="assets/sbux/hero-billboard.jpg" alt="Seafood restaurant billboard of chefs plating oysters" loading="lazy" decoding="async"><div class="jf-i"><span class="jf-og"><span class="jf-ot"><img src="assets/lg/sb-old.png" alt="Original Starbucks logo before the redesign" loading="lazy" decoding="async"></span><span class="label">Original</span></span><h4>Starbucks &rarr;<br>Seafood</h4><div class="jf-r"><span class="label">Identity &nbsp;/&nbsp; Menu &nbsp;/&nbsp; Signage</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></div></div></a></div></div>
   </div>
 </section>
 
@@ -588,11 +767,11 @@ html{background:var(--dark)}
   <div class="wrap">
     <div class="head rv"><h2>What I’m posting</h2></div>
     <div class="crow rv" id="row-ig">
-      <div class="rail"><span class="tiny plt"><svg class="plat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</span><span class="tiny"><a href="https://www.instagram.com/joe_limoli/" target="_blank" rel="noopener">@joe_limoli <span aria-hidden="true">↗</span></a></span></div>
+      <div class="rail"><span class="tiny plt"><svg class="plat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</span><span class="tiny"><a href="https://www.instagram.com/joe_limoli/" target="_blank" rel="noopener">@joe_limoli <svg class="ar" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></span></div>
       <div class="cbelt"><div class="ctrack" id="trk-ig"></div></div>
     </div>
     <div class="crow rev rv" id="row-li">
-      <div class="rail"><span class="tiny plt"><svg class="plat" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor"/><path fill="#fff" d="M6.6 9.7h2.6V18H6.6V9.7zm1.3-4.1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM10.9 9.7h2.5v1.1h.04c.35-.66 1.2-1.36 2.47-1.36 2.64 0 3.13 1.74 3.13 4V18h-2.6v-3.9c0-.93-.02-2.13-1.3-2.13-1.3 0-1.5 1.01-1.5 2.06V18h-2.6V9.7z"/></svg>LinkedIn posts</span><span class="tiny"><a href="https://www.linkedin.com/in/joe-limoli/" target="_blank" rel="noopener">Joe Limoli <span aria-hidden="true">↗</span></a></span></div>
+      <div class="rail"><span class="tiny plt"><svg class="plat" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor"/><path fill="#fff" d="M6.6 9.7h2.6V18H6.6V9.7zm1.3-4.1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM10.9 9.7h2.5v1.1h.04c.35-.66 1.2-1.36 2.47-1.36 2.64 0 3.13 1.74 3.13 4V18h-2.6v-3.9c0-.93-.02-2.13-1.3-2.13-1.3 0-1.5 1.01-1.5 2.06V18h-2.6V9.7z"/></svg>LinkedIn posts</span><span class="tiny"><a href="https://www.linkedin.com/in/joe-limoli/" target="_blank" rel="noopener">Joe Limoli <svg class="ar" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></span></div>
       <div class="cbelt"><div class="ctrack" id="trk-li"></div></div>
     </div>
   </div>
@@ -737,9 +916,9 @@ init('kmf-strong.html','#03034D','assets/kmf/curtain-icon.png','clamp(110px,15vw
 init('boston-glove-company.html','#9E2E2D','assets/bgc/curtain-icon.png','clamp(84px,9.5vw,124px)',['assets/bgc.jpg'],false);
 init('skin-ritual.html','#000','assets/skin-ritual/curtain-icon-white.png','clamp(120px,16vw,200px)',['assets/skin-ritual/sr111.jpg'],false);
 init('five-guys-racing.html','#F9192A','assets/fg/curtain-icon.png','clamp(120px,16vw,220px)',['assets/fg/hero-flags.jpg'],false);
-init('starbucks-seafood.html','#FFFFFF','assets/sbux/curtain-icon.png','clamp(120px,16vw,220px)',['assets/sbux/hero-billboard.jpg'],false);
+init('starbucks-seafood.html','#1E3932','assets/sbux/curtain-icon-white.png','clamp(120px,16vw,220px)',['assets/sbux/hero-billboard.jpg'],false);
 init('brew-zone.html','#05ADE1','assets/bz/curtain-icon.png','clamp(120px,16vw,220px)',['assets/bz/hero.jpg'],false);
-init('lt-electric.html','#CCFF00','assets/lt/curtain-icon.png','clamp(120px,16vw,220px)',['assets/lt/hero.jpg'],false);
+init('lt-electric.html','#CCFF00','assets/lt/curtain-icon.png','clamp(120px,16vw,220px)',['assets/lt/van-side.jpg'],false);
 init('choice-fitness.html','#FFE000','assets/cf/curtain-icon.png','clamp(120px,16vw,220px)',['assets/cf/hero.jpg'],false);
 
 addEventListener('pageshow',function(){document.querySelectorAll('[data-curtain]').forEach(function(x){x.remove()});all.forEach(function(a){delete a.dataset.go})});
@@ -786,6 +965,71 @@ form.addEventListener('submit',function(e){e.preventDefault();var ok=true,v=em.v
  window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body)});
 var cp=document.getElementById('mm-copy');if(cp)cp.addEventListener('click',function(){var t=cp.textContent;function ok(){cp.textContent='Copied';setTimeout(function(){cp.textContent=t},1600)}
  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(TO).then(ok,function(){});else ok()});
+})();
+</script>
+<div class="tlm" id="lcm" role="dialog" aria-modal="true" aria-labelledby="lcm-t" aria-hidden="true">
+  <div class="tlm-card">
+    <button class="mm-x" type="button" aria-label="Close" data-tlm-close><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+    <h2 id="lcm-t">Launched with the team</h2>
+    <p class="sub">What I designed on each REEKON product, in launch order.</p>
+    <div class="lc">
+      <div class="lc-i" style="--i:0"><span class="lc-n">01</span><h3>T1 Tomahawk<small>First project</small></h3><ul><li>All launch packaging</li><li>Button iconography</li><li>Tape measure blade design</li><li>Replacement blade packaging</li></ul></div>
+      <div class="lc-i" style="--i:1"><span class="lc-n">02</span><h3>T1M Utility</h3><ul><li>Packaging design</li><li>Product label design</li><li>Button iconography</li><li>Entire UI, T1M + font building</li><li>Replacement blade packaging</li></ul></div>
+      <div class="lc-i" style="--i:2"><span class="lc-n">03</span><h3>ROCK app</h3><ul><li>Icons</li><li>Grouping systems</li><li>Tile measurement design</li><li>Construction calculators</li></ul></div>
+      <div class="lc-i" style="--i:3"><span class="lc-n">04</span><h3>P1L Tagger</h3><ul><li>Packaging</li><li>Label development</li><li>In-app UI</li></ul></div>
+      <div class="lc-i" style="--i:4"><span class="lc-n">05</span><h3>BOLDR app</h3><ul><li>UI screens</li><li>Icons</li></ul></div>
+      <div class="lc-i" style="--i:5"><span class="lc-n">06</span><h3>T1R Range</h3><ul><li>Packaging design</li><li>Button icons</li><li>Product label design</li></ul></div>
+    </div>
+  </div>
+</div>
+<div class="tlm" id="tsm" role="dialog" aria-modal="true" aria-labelledby="tsm-t" aria-hidden="true">
+  <div class="tlm-card">
+    <button class="mm-x" type="button" aria-label="Close" data-tlm-close><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+    <h2 id="tsm-t">What clients say</h2>
+    <p class="sub">In their words, from the brands I’ve built.</p>
+    <div class="ts">
+      <figure class="ts-i" style="--i:0"><svg class="ts-q" width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path fill="currentColor" d="M0 26V14C0 6 4 1 12 0l1 3C8 4.5 6 7 6 11h7v15zm20 0V14c0-8 4-13 12-14l1 3c-5 1.5-7 4-7 8h7v15z"/></svg><blockquote>Working with Joe was a game-changer for me. Every part of the process felt thoughtful, creative, and perfectly aligned with who we are. He made everything simple to follow, kept me in the loop with clear updates, and helped translate vague ideas into something meaningful. The end result feels genuinely me. Couldn’t recommend Joe more if you’re building a brand that you care about.</blockquote><figcaption><b>The Social Chair</b><span>Barbershop brand</span></figcaption></figure>
+      <figure class="ts-i" style="--i:1"><svg class="ts-q" width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path fill="currentColor" d="M0 26V14C0 6 4 1 12 0l1 3C8 4.5 6 7 6 11h7v15zm20 0V14c0-8 4-13 12-14l1 3c-5 1.5-7 4-7 8h7v15z"/></svg><blockquote>Working with Joe was awesome. We started with just a rough idea and a name that didn’t really fit. He helped us rethink everything. The name. The entire look and feel. Now we’ve got something that feels legit, stands out, and actually speaks to both athletes and coaches. Super easy process and way better than we imagined.</blockquote><figcaption><b>Prospects Sports Recruiting</b><span>Sports recruiting brand</span></figcaption></figure>
+      <figure class="ts-i" style="--i:2"><svg class="ts-q" width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path fill="currentColor" d="M0 26V14C0 6 4 1 12 0l1 3C8 4.5 6 7 6 11h7v15zm20 0V14c0-8 4-13 12-14l1 3c-5 1.5-7 4-7 8h7v15z"/></svg><blockquote>So pleased with my branding! I’ve never had anything like this done before and was putting it off for ages, but it’s been the best decision I’ve made for my business. People really seem to respect my business more being in the realtor space. The process was so easy with a quick turnaround. 100% recommend Joe to anyone thinking about branding &amp; logo designs. He’s been a pleasure to work with! Thanks again!</blockquote><figcaption><b>N.E.W.S Real Estate</b><span>Real estate branding</span></figcaption></figure>
+    </div>
+  </div>
+</div>
+<div class="tlm" id="tlm" role="dialog" aria-modal="true" aria-labelledby="tlm-t" aria-hidden="true">
+  <div class="tlm-card">
+    <button class="mm-x" type="button" aria-label="Close" data-tlm-close><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
+    <h2 id="tlm-t">Where I've worked</h2>
+    <p class="sub">Seven-plus years across product, packaging, and brand identity.</p>
+    <div class="tl" style="--n:5">
+      <div class="tl-i" style="--i:0"><p class="tl-y">2018 – 2019</p><div class="tl-c"><div class="tl-lg bx" style="background:#0B1F4D"><img src="assets/tl/medica-w.png" alt="Medica" loading="lazy" style="width:52px"></div><h3>Medica Corp.</h3><ul class="tl-r"><li>UX/UI Intern</li></ul></div></div>
+      <div class="tl-i" style="--i:1"><p class="tl-y">2019 – 2022</p><div class="tl-c"><div class="tl-lg bx" style="background:#fff"><img src="assets/tl/tawk.png" alt="TAWK Media" loading="lazy" style="width:46px"></div><h3>TAWK Media</h3><ul class="tl-r"><li>Graphic Designer</li></ul></div></div>
+      <div class="tl-i now" style="--i:2"><p class="tl-y">2021 – Now</p><div class="tl-c"><div class="tl-lg bx" style="background:#000"><img src="assets/tl/limoli-w.png" alt="Limoli Design" loading="lazy" style="width:38px"></div><h3>Limoli Design</h3><ul class="tl-r"><li>Identity Designer and Founder</li></ul></div></div>
+      <div class="tl-i" style="--i:3"><p class="tl-y">2022 – 2025</p><div class="tl-c"><div class="tl-lg bx" style="background:#000"><img src="assets/reekon/curtain-icon.png" alt="REEKON" loading="lazy" style="width:52px"></div><h3>REEKON Tools</h3><ul class="tl-r"><li>Senior Graphic Designer</li></ul></div></div>
+      <div class="tl-i now" style="--i:4"><p class="tl-y">2025 – Now</p><div class="tl-c"><div class="tl-lg bx" style="background:#000"><img src="assets/reekon/curtain-icon.png" alt="REEKON" loading="lazy" style="width:52px"></div><h3>REEKON Tools</h3><ul class="tl-r"><li>Lead Designer</li></ul></div></div>
+    </div>
+    <p class="tl-hs">Swipe to see more</p>
+  </div>
+</div>
+<script>
+(function(){var t=document.getElementById('lcm'),b=document.getElementById('lc-open');if(!t||!b)return;var last=null;
+function open(){last=document.activeElement;t.classList.add('open');t.setAttribute('aria-hidden','false');document.body.classList.add('mm-lock');var c=t.querySelector('.tlm-card');c.setAttribute('tabindex','-1');setTimeout(function(){c.focus({preventScroll:true})},60)}
+function close(){t.classList.remove('open');t.setAttribute('aria-hidden','true');document.body.classList.remove('mm-lock');if(last&&last.focus)last.focus()}
+b.addEventListener('click',open);b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+t.addEventListener('click',function(e){if(e.target===t||e.target.closest('[data-tlm-close]'))close()});
+document.addEventListener('keydown',function(e){if(!t.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='Tab'){e.preventDefault();t.querySelector('[data-tlm-close]').focus()}});
+})();
+(function(){var t=document.getElementById('tsm'),b=document.getElementById('ts-open');if(!t||!b)return;var last=null;
+function open(){last=document.activeElement;t.classList.add('open');t.setAttribute('aria-hidden','false');document.body.classList.add('mm-lock');var c=t.querySelector('.tlm-card');c.setAttribute('tabindex','-1');setTimeout(function(){c.focus({preventScroll:true})},60)}
+function close(){t.classList.remove('open');t.setAttribute('aria-hidden','true');document.body.classList.remove('mm-lock');if(last&&last.focus)last.focus()}
+b.addEventListener('click',open);b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+t.addEventListener('click',function(e){if(e.target===t||e.target.closest('[data-tlm-close]'))close()});
+document.addEventListener('keydown',function(e){if(!t.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='Tab'){e.preventDefault();t.querySelector('[data-tlm-close]').focus()}});
+})();
+(function(){var t=document.getElementById('tlm'),b=document.getElementById('tl-open');if(!t||!b)return;var last=null;
+function open(){last=document.activeElement;t.classList.add('open');t.setAttribute('aria-hidden','false');document.body.classList.add('mm-lock');var c=t.querySelector('.tlm-card');c.setAttribute('tabindex','-1');setTimeout(function(){c.focus({preventScroll:true})},60)}
+function close(){t.classList.remove('open');t.setAttribute('aria-hidden','true');document.body.classList.remove('mm-lock');if(last&&last.focus)last.focus()}
+b.addEventListener('click',open);b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+t.addEventListener('click',function(e){if(e.target===t||e.target.closest('[data-tlm-close]'))close()});
+document.addEventListener('keydown',function(e){if(!t.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='Tab'){e.preventDefault();t.querySelector('[data-tlm-close]').focus()}});
 })();
 </script>
 <script type="application/json" id="content-data">{
@@ -893,7 +1137,7 @@ function pad(n){return n<10?'0'+n:''+n}
 function reel(r,i,igUrl){var u=r.url||igUrl,cls='reel'+(r.fit==='contain'?' contain':'')+(r.placeholder?' ph':''),st=r.bg?' style="background-color:'+esc(r.bg)+'"':'';
  var media=r.video?'<video muted loop playsinline autoplay preload="metadata"'+(r.thumb?' poster="'+esc(r.thumb)+'"':'')+'><source src="'+esc(r.video)+'" type="video/mp4"></video>':(r.thumb?'<img class="rimg" src="'+esc(r.thumb)+'" alt=""'+(r.pos?' style="object-position:'+esc(r.pos)+'"':'')+' loading="lazy">':'');
  return '<a class="'+cls+'"'+st+' href="'+esc(u)+'" target="_blank" rel="noopener" aria-label="'+esc((r.title||'Instagram post')+': '+(r.caption||''))+'">'+media+(r.video?'<span class="rt"><i></i></span>':'')+'<span class="rc">'+esc(r.caption||r.title||'')+'</span></a>'}
-function post(p,i,liUrl){var u=p.url||liUrl;return '<a class="lpost" href="'+esc(u)+'" target="_blank" rel="noopener"><span class="lt"><span>Post '+pad(i+1)+'</span><span>'+(p.sample?'Sample post':esc(p.date||''))+'</span></span><p>'+esc(p.text)+'</p><span class="lf">Read on LinkedIn ↗</span></a>'}
+function post(p,i,liUrl){var u=p.url||liUrl;return '<a class="lpost" href="'+esc(u)+'" target="_blank" rel="noopener"><span class="lt"><span>Post '+pad(i+1)+'</span><span>'+(p.sample?'Sample post':esc(p.date||''))+'</span></span><p>'+esc(p.text)+'</p><span class="lf">Read on LinkedIn <svg class="ar" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></span></a>'}
 function fill(el,items,dur){var one='<div class="cset">'+items.join('')+'</div>';el.innerHTML=one+one.replace('class="cset"','class="cset" aria-hidden="true"');
  el.querySelectorAll('.cset[aria-hidden] a').forEach(function(a){a.tabIndex=-1});el.style.setProperty('--dur',dur+'s')}
 function render(d){var igd=d.instagram||{},lid=d.linkedin||{};
@@ -916,5 +1160,26 @@ var bp=document.getElementById('tk-p'),bn=document.getElementById('tk-x');if(bp)
 fit();requestAnimationFrame(tick);addEventListener('load',fit);var to;addEventListener('resize',function(){clearTimeout(to);to=setTimeout(fit,200)});
 r.addEventListener('mouseenter',function(){paused=true});r.addEventListener('mouseleave',function(){paused=false});
 r.addEventListener('touchstart',function(){paused=true},{passive:true});r.addEventListener('touchend',function(){setTimeout(function(){paused=false},1200)},{passive:true});r.addEventListener('touchcancel',function(){paused=false},{passive:true})})();</script>
+<script>
+(function(){var h=document.getElementById('top'),pin=h&&h.querySelector('.hero-pin');if(!pin||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var t=false;function u(){t=false;var r=h.getBoundingClientRect(),span=h.offsetHeight-pin.offsetHeight-(matchMedia('(max-width:600px),(hover:none) and (pointer:coarse)').matches?0:pin.offsetHeight*.8);if(r.bottom<-50)return;var pp=Math.min(1,Math.max(0,-r.top/span));h.style.setProperty('--p',pp.toFixed(4));h.classList.toggle('hl-on',pp>.9)}
+addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(u)}},{passive:true});addEventListener('resize',u);u()})();
+</script>
+
+<script>
+(function(){var t=document.getElementById('id-go');if(!t)return;function go(){var p=document.getElementById('projects');if(!p)return;var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;p.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'})}
+t.addEventListener('click',go);t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})})();
+</script>
+<script>(function(){var rs=document.querySelectorAll('.jf-rail'),n=document.getElementById('jf-n'),p=document.getElementById('jf-p');if(!n||!p)return;function go(d){rs.forEach(function(r){r.scrollBy({left:d*r.clientWidth*.6,behavior:'smooth'})})}n.onclick=function(){go(1)};p.onclick=function(){go(-1)}})();</script>
+<script>(function(){
+var RE=/^(the-social-chair|kmf-strong|boston-glove-company|skin-ritual|brew-zone|lt-electric|choice-fitness|five-guys-racing|starbucks-seafood|reekon-tools|personal-series)\.html/;
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(RE.test(h)){try{sessionStorage.setItem('pfReturn',String(Math.round(window.pageYOffset)))}catch(x){}}},true);
+if(location.hash!=='#back')return;
+var y=0;try{y=parseInt(sessionStorage.getItem('pfReturn')||'0',10)||0}catch(x){}
+try{history.replaceState(null,'',location.pathname+location.search)}catch(x){}
+if(!y)return;
+var de=document.documentElement;de.style.scrollBehavior='auto';
+function go(){window.scrollTo(0,y);window.dispatchEvent(new Event('scroll'))}
+go();requestAnimationFrame(go);window.addEventListener('load',function(){go();setTimeout(go,250);setTimeout(function(){go();de.style.scrollBehavior=''},900)});
+})();</script>
 </body>
 </html>

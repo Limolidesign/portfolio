@@ -704,5 +704,7 @@ var cp=document.getElementById('mm-copy');if(cp)cp.addEventListener('click',func
 var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{rootMargin:'250px'});
 vs.forEach(function(v){io.observe(v)})})();
 </script>
+<style>.pf-back{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:12;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:12px;background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.22);font:600 11px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:hover{background:#141414}.pf-back:hover svg{transform:translateX(-3px)}.pf-back svg{transition:transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:focus-visible{outline:2px solid #fff;outline-offset:2px}@media(max-width:600px){.pf-back{min-height:46px;padding:0 18px}}</style>
+<a class="pf-back" href="portfolio.html#back" aria-label="Back to the portfolio"><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6H2M6.5 1.5 2 6l4.5 4.5"/></svg>Back</a>
 </body>
 </html>

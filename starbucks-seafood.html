@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script>if(location.hash==='#from-card'){window.__fc=1;document.documentElement.style.background='#FFFFFF'}</script>
+<script>if(location.hash==='#from-card'){window.__fc=1;document.documentElement.style.background='#1E3932'}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Starbucks Seafood & Spirits | Joe Limoli</title>
@@ -561,8 +561,8 @@ body{overflow-x:clip}
 if(location.hash!=='#from-card')return;
 try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
 var c=document.createElement('div');c.id='open-cover';
-c.style.cssText='position:fixed;z-index:15;inset:0;background:#FFFFFF;pointer-events:none';
-var lg=document.createElement('img');lg.src='assets/sbux/curtain-icon.png';lg.alt='';lg.style.cssText='position:absolute;left:50%;top:50%;width:clamp(120px,16vw,220px);transform:translate(-50%,-50%)';c.appendChild(lg);
+c.style.cssText='position:fixed;z-index:15;inset:0;background:#1E3932;pointer-events:none';
+var lg=document.createElement('img');lg.src='assets/sbux/curtain-icon-white.png';lg.alt='';lg.style.cssText='position:absolute;left:50%;top:50%;width:clamp(120px,16vw,220px);transform:translate(-50%,-50%)';c.appendChild(lg);
 document.body.insertBefore(c,document.body.firstChild);
 var gone=false;function rm(){if(gone)return;gone=true;var ez='cubic-bezier(.7,0,.2,1)';lg.animate([{transform:'translate(-50%,-50%)'},{transform:'translate(-50%,calc(-50% - '+(innerHeight/2)+'px))'}],{duration:750,easing:ez,fill:'forwards'});c.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{duration:750,easing:ez,fill:'forwards'}).finished.then(function(){c.remove();document.documentElement.style.background=''},function(){c.remove();document.documentElement.style.background=''})}
 document.addEventListener('DOMContentLoaded',function(){var im=document.querySelector('.cs-banner img');function ok(){setTimeout(rm,200)}if(im&&!im.complete)im.addEventListener('load',ok,{once:true});else ok()});setTimeout(rm,1400);
@@ -713,5 +713,7 @@ var cp=document.getElementById('mm-copy');if(cp)cp.addEventListener('click',func
 var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{rootMargin:'250px'});
 vs.forEach(function(v){io.observe(v)})})();
 </script>
+<style>.pf-back{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:12;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:12px;background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.22);font:600 11px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:hover{background:#141414}.pf-back:hover svg{transform:translateX(-3px)}.pf-back svg{transition:transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:focus-visible{outline:2px solid #fff;outline-offset:2px}@media(max-width:600px){.pf-back{min-height:46px;padding:0 18px}}</style>
+<a class="pf-back" href="portfolio.html#back" aria-label="Back to the portfolio"><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6H2M6.5 1.5 2 6l4.5 4.5"/></svg>Back</a>
 </body>
 </html>
