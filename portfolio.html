@@ -759,12 +759,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:70;opa
 .dk-x .dk-m{height:14px}
 .p-box:hover .dk-x{background:var(--teal);transform:rotate(90deg)}
 /* skills paper band */
-.skills{background:var(--paper);color:#000;isolation:isolate;--ink:#000;--muted:#5A5A5A;--line:#CFCCC4;--tint:#E2DFD7;--ghost:rgba(17,17,17,.3);border-top:0}
-.skills::before{content:"";position:absolute;inset:0;z-index:-1;background:#000;-webkit-mask:var(--pc) center/cover no-repeat;mask:var(--pc) center/cover no-repeat;opacity:.1;pointer-events:none}
-.skills h2,.skills h3,.skills .eyebrow,.skills p,.skills li{color:#000}.skills .lead,.skills .label.soft{color:#5A5A5A}
-.skills .dk-hr,.skills .bc{color:#000}.skills .ln{background:rgba(0,0,0,.35)}
 .sk-card{position:relative}.sk-card li{border-top-color:#C4C0B6}
-.sk-card .dk-i.sk{position:absolute;right:clamp(18px,2vw,28px);top:clamp(20px,2.4vw,30px);width:30px;height:30px;color:var(--teal)}
+.sk-card .dk-i.sk{position:absolute;right:clamp(18px,2vw,28px);top:clamp(20px,2.4vw,30px);width:30px;height:30px;color:#6FB5A5}
 .sk-tools{border-top-color:#000}
 /* paper logo band */
 .marquee{background:var(--paper);border-block:1px solid var(--char);-webkit-mask-image:none;mask-image:none}
@@ -808,6 +804,7 @@ html .hero{position:relative;z-index:71}
 @keyframes dkfill{0%{clip-path:inset(0 0 100% 0)}60%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0);opacity:0}}
 @media(max-width:700px){.dk-hgw{right:-22vw;width:80vw;height:80vw;margin-top:-40vw}.dk-hring{right:-28vw;width:92vw;margin-top:-46vw}.dk-dots{bottom:24px;width:10px;height:80px}}
 @media(prefers-reduced-motion:reduce){.dk-dots .dk-m.f{animation:none!important}}
+@media(min-width:701px){.dk-dots{top:50%;bottom:auto;margin-top:-48px}}
 
 /* highlights: own full-width section under the hero */
 section.dk-hl.ko-end{position:relative!important;inset:auto!important;display:block!important;min-height:0!important;height:auto!important;padding:0!important;font-size:var(--t0)!important;text-align:left;pointer-events:auto;--p:1;z-index:2}
@@ -895,6 +892,38 @@ html .hero{height:calc(var(--hph) - 120px)!important;min-height:600px}
 .sk-card .dk-i.sk{right:calc(clamp(18px,2vw,28px) + 14px)}
 .ts-i{position:relative}.ts-i::before{content:"\201C";display:block;font:900 72px/.6 "Eurostile Extended","Arial Black",sans-serif;color:#6FB5A5;height:34px}
 .contact a:not(.btn){background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:3px;transition:background-size .4s cubic-bezier(.2,.8,.2,1)}.contact a:not(.btn):hover{background-size:30% 1px}
+html body .tl-c{background:none!important}
+html body section.contact{background:#0A2B25 url(assets/hero-bg.webp) center/cover no-repeat!important}
+html body section.contact>.dk-fbg{display:none!important}
+html body .sk-card h3{font-size:clamp(22px,2.1vw,32px)!important;line-height:1.05!important;white-space:normal!important;min-height:0}
+@media(max-width:860px){html body .sk-card h3{min-height:0!important}}
+html body nav>.btn{background:#fff!important;color:#17191A!important;box-shadow:inset 0 0 0 1px #17191A!important}
+html body nav>.btn:hover{background:#186154!important;color:#fff!important;box-shadow:inset 0 0 0 1px #186154!important}
+.nav-pill .brand{position:relative!important;top:1.25px!important}
+.nav-pill .brand .logo{position:relative!important;top:-1.25px!important}
+.nav-pill ul{position:relative!important;top:-2px!important}
+@media(max-width:600px){
+html header.hero{height:var(--hmh,550px)!important;min-height:420px!important}
+html .hero .ko-end{justify-content:center!important;padding-top:0!important;padding-bottom:0!important;box-sizing:border-box;height:100%!important;min-height:0!important}
+html .hero .hero-pin{height:100%!important;min-height:0!important}
+section.dk-hl.ko-end .hl-mq{margin:0!important;padding:0!important;overflow:hidden}
+section.dk-hl.ko-end .hl{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;max-width:none!important;transform:none!important;animation:none!important;gap:1px}
+section.dk-hl.ko-end .hl>.hl-t:nth-child(n+5){display:none!important}
+section.dk-hl.ko-end .hl-t{width:auto!important;min-width:0!important;flex:none!important;height:clamp(190px,52vw,230px)!important}
+html header.hero .ko-end>span:not(.ko-sub){font-size:calc((100vw - 32px)/11.6)!important;line-height:1!important}
+html .about .about-me{row-gap:0}
+html .about .about-me>.rv:last-child{display:contents}
+html .about .about-me>.rv:last-child>.dk-hr,html .about .about-me>.rv:last-child>.label,html .about .about-me>.rv:last-child>h2{order:1}
+html .about .about-me>.about-left{order:2;margin:28px 0}
+html .about .about-me>.rv:last-child>:not(.dk-hr):not(.label):not(h2){order:3}
+section.dk-hl.ko-end .hl-t{padding:16px!important}
+html .ko-end .hl-v small,html .ko-end .hl-c{opacity:1!important;transform:none!important}
+html section.dk-hl.ko-end .hl-t:hover .hl-v,html section.dk-hl.ko-end .hl-t:focus .hl-v,html section.dk-hl.ko-end .hl-t:focus-visible .hl-v,html section.dk-hl.ko-end .hl-t:active .hl-v{transform:none!important}
+html section.dk-hl.ko-end .hl-t:hover,html section.dk-hl.ko-end .hl-t:active{transform:none!important;translate:none!important}
+#projects .p-grid article.project{margin-bottom:24px!important}
+}
+
+html body .ts-q{display:none!important}
 </style>
 </head>
 <body>
@@ -1007,7 +1036,7 @@ html .hero{height:calc(var(--hph) - 120px)!important;min-height:600px}
 
 <section class="content pad" id="content" aria-label="Content">
   <div class="wrap">
-    <div class="head rv"><span class="dk-hr" aria-hidden="true"><span class="dk-lb">Brand</span><svg class="dk-i " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-spk"/></svg><span class="dk-lb">Web</span><svg class="dk-i " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-spk"/></svg><span class="dk-lb">Packaging</span><i class="ln"></i></span><span class="label eyebrow">04 / Content</span><h2>What I’m posting</h2></div>
+    <div class="head rv"><span class="label eyebrow">04 / Content</span><h2>What I’m posting</h2></div>
     <div class="crow rv" id="row-ig">
       <div class="rail"><span class="tiny plt"><svg class="plat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</span><span class="tiny"><a href="https://www.instagram.com/joe_limoli/" target="_blank" rel="noopener">@joe_limoli <svg class="ar" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12L12 2M5 2h7v7"/></svg></a></span></div>
       <div class="cbelt"><div class="ctrack" id="trk-ig"></div></div>
@@ -1021,13 +1050,12 @@ html .hero{height:calc(var(--hph) - 120px)!important;min-height:600px}
 
 <section class="skills pad pc44" id="skills">
   <div class="wrap">
-    <div class="head rv"><span class="dk-hr" aria-hidden="true"><i class="ln"></i><span class="dk-chip"><span class="dk-lb">Skills</span></span><i class="ln"></i></span><span class="label eyebrow">05 / Skills</span><h2>What I design, and what I use</h2></div>
-    <div class="sk-cards rv" aria-label="What I design"><div class="sk-card"><svg class="dk-i sk" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-cmp"/></svg><h3>Brand</h3><p class="lead">Naming the idea, then building the system around it.</p><ul><li>Brand identity</li><li>Visual identity systems</li><li>Logo design</li><li>Brand guidelines</li><li>Brand positioning workshops</li></ul></div><div class="sk-card"><svg class="dk-i sk" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-lyr"/></svg><h3>Product and campaign</h3><p class="lead">Making the brand work on shelves, feeds and decks.</p><ul><li>Packaging design</li><li>Ad creative</li><li>Studio photography</li><li>Infographics</li><li>Presentation design</li></ul></div><div class="sk-card"><svg class="dk-i sk" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-grd"/></svg><h3>Digital</h3><p class="lead">Interfaces and sites that carry the brand online.</p><ul><li>UX/UI design</li><li>Websites</li><li>Iconography</li></ul></div></div>
+    <div class="head rv"><span class="label eyebrow">05 / Skills</span><h2>What I design</h2></div>
+    <div class="sk-cards rv" aria-label="What I design"><div class="sk-card"><h3>Brands</h3><p class="lead">Naming the idea, then building the system around it.</p><ul><li>Brand identity</li><li>Visual identity systems</li><li>Logo design</li><li>Brand guidelines</li><li>Brand positioning workshops</li></ul></div><div class="sk-card"><h3>Campaigns</h3><p class="lead">Making the brand work on shelves, feeds and decks.</p><ul><li>Packaging design</li><li>Ad creative</li><li>Studio photography</li><li>Infographics</li><li>Presentation design</li></ul></div><div class="sk-card"><h3>Digital</h3><p class="lead">Interfaces and sites that carry the brand online.</p><ul><li>UX/UI design</li><li>Websites</li><li>Iconography</li></ul></div></div>
     <div class="sk-tools rv" aria-label="What I use"><div class="sk-row"><span class="label soft">Design</span><p>Figma, FigJam, Photoshop, Illustrator, Lightroom, Adobe Express, Acrobat, Canva, CapCut</p></div><div class="sk-row"><span class="label soft">AI</span><p>Claude, ChatGPT, Gemini</p></div><div class="sk-row"><span class="label soft">Web and marketing</span><p>Shopify, Squarespace, Wix, Instant.io, Kickstarter, Amazon A+ Content, Klaviyo, Mailchimp</p></div><div class="sk-row"><span class="label soft">Workflow</span><p>Asana, Trello, Slack, Google Workspace, Pics.io</p></div></div>
   </div>
 </section>
 
-<div class="dk-div" aria-hidden="true"><i class="ln"></i><svg class="dk-i " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#d-arr"/></svg></div>
 <section id="contact" class="contact pad">
   <span class="dk-pc dk-fbg pc90"></span><span class="dk-gl dk-fbg"></span>
   <div class="wrap">
@@ -1037,7 +1065,8 @@ html .hero{height:calc(var(--hph) - 120px)!important;min-height:600px}
 </section>
 
 <div class="dk-idx" role="navigation" aria-label="Sections"><a href="#projects" data-s="projects">01</a><a href="#about" data-s="about">02</a><a href="#personal" data-s="personal">03</a><a href="#content" data-s="content">04</a><a href="#skills" data-s="skills">05</a></div>
-<script>(function(){var l=[].slice.call(document.querySelectorAll(".dk-idx a"));if(l.length&&window.IntersectionObserver){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){l.forEach(function(a){a.classList.toggle("on",a.getAttribute("data-s")===e.target.id)})}})},{rootMargin:"-45% 0px -50% 0px"});l.forEach(function(a){var t=document.getElementById(a.getAttribute("data-s"));if(t)io.observe(t)})}
+<script>(function(){var l=[].slice.call(document.querySelectorAll(".dk-idx a"));if(l.length){var ids=l.map(function(a){return a.getAttribute("data-s")}),tk=0;function up(){tk=0;var m=innerHeight/2,cur=null;ids.forEach(function(id){var e=document.getElementById(id);if(e&&e.getBoundingClientRect().top<=m)cur=id});var c=document.getElementById("contact");if(c&&c.getBoundingClientRect().top<=m)cur=null;l.forEach(function(a){a.classList.toggle("on",a.getAttribute("data-s")===cur)})}
+function rq(){if(!tk)tk=requestAnimationFrame(up)}addEventListener("scroll",rq,{passive:true});addEventListener("resize",rq);up()}
 var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
 var hp=document.querySelector(".hero-pin"),xh=document.querySelector(".dk-xh");if(hp&&xh&&!rm&&matchMedia("(hover:hover)").matches){var h=xh.querySelector("b"),v=xh.querySelector("u"),t=xh.querySelector("em");hp.addEventListener("pointermove",function(e){var r=hp.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;xh.style.opacity=1;h.style.transform="translateY("+y+"px)";v.style.transform="translateX("+x+"px)";t.style.transform="translate("+(x+10)+"px,"+(y+10)+"px)";t.textContent="X "+("000"+Math.round(x)).slice(-4)+" / Y "+("000"+Math.round(y)).slice(-4)});hp.addEventListener("pointerleave",function(){xh.style.opacity=0})}
 if(!rm){var C="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/";function sc(el){if(el._sc)return;el._sc=1;var o=el.getAttribute("data-o"),n=0,f=14;(function st(){el.textContent=o.split("").map(function(c,i){return c===" "||c==="/"||i<n/f*o.length?c:C[Math.floor(Math.random()*C.length)]}).join("");if(++n<=f)setTimeout(st,38);else{el.textContent=o;el._sc=0}})()}
@@ -1051,12 +1080,6 @@ function go(){if(rm)return;clearInterval(tm);lock();var f=0,n=cs.length;tm=setIn
 h.addEventListener("mouseenter",go);h.setAttribute("tabindex","0");h.addEventListener("focus",go);
 if("IntersectionObserver"in window){var io=new IntersectionObserver(function(x){if(x[0].isIntersecting){go();io.disconnect()}},{threshold:.6});io.observe(h)}
 addEventListener("resize",function(){if(!tm)return;unlock()})})();</script>
-<script>(function(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;var L=[].slice.call(document.querySelectorAll(".hero .ko-end>span:not(.ko-sub)"));if(!L.length)return;var d=document.documentElement,C="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+*",cs=[],tm,ran=false;
-L.forEach(function(sp){var s=sp.textContent;sp.textContent="";s.split("").forEach(function(ch){var c=document.createElement("span");c.textContent=ch;c.setAttribute("data-c",ch);if(ch===" ")c.style.whiteSpace="pre";sp.appendChild(c);cs.push(c)})});
-function lock(){cs.forEach(function(c){c.style.cssText=c.getAttribute("data-c")===" "?"white-space:pre":"";});var w=cs.map(function(c){return c.getBoundingClientRect().width});cs.forEach(function(c,i){if(c.getAttribute("data-c")!==" ")c.style.cssText="display:inline-block;text-align:center;width:"+w[i]+"px"})}
-function unlock(){cs.forEach(function(c){c.style.cssText=c.getAttribute("data-c")===" "?"white-space:pre":""})}
-function go(){if(ran)return;ran=true;lock();var f=0,n=cs.length,k=2.2;cs.forEach(function(c){if(c.getAttribute("data-c")!==" ")c.textContent=C[Math.floor(Math.random()*C.length)]});tm=setInterval(function(){f++;cs.forEach(function(c,i){var o=c.getAttribute("data-c");c.textContent=(i<f/k||o===" ")?o:C[Math.floor(Math.random()*C.length)]});if(f/k>=n){clearInterval(tm);unlock()}},34)}
-if(d.classList.contains("go"))setTimeout(go,150);else{var mo=new MutationObserver(function(){if(d.classList.contains("go")){mo.disconnect();go()}});mo.observe(d,{attributes:true,attributeFilter:["class"]})}})();</script>
 <script>(function(){var cv=document.querySelector(".dk-gc");if(!cv)return;var cx=cv.getContext("2d"),rm=matchMedia("(prefers-reduced-motion:reduce)").matches,D=Math.PI/180,th=-20*D,tilt=20*D,vis=true,last=0,W=0,R=0,dpr=1;
 function size(){dpr=Math.min(2,devicePixelRatio||1);var r=cv.getBoundingClientRect();W=r.width;cv.width=Math.round(W*dpr);cv.height=Math.round(W*dpr);R=W/2*.97}
 function pj(lat,lon){var cl=Math.cos(lat),x=cl*Math.sin(lon+th),y=Math.sin(lat),z=cl*Math.cos(lon+th),ct=Math.cos(tilt),st=Math.sin(tilt),y2=y*ct-z*st,z2=y*st+z*ct;return[x,y2,z2]}
@@ -1073,6 +1096,10 @@ function f(t){if(vis){th+=(t-(f.p||t))*2*Math.PI/70000;last=t;draw()}f.p=t;reque
 size();addEventListener("resize",function(){size();draw()});
 if("IntersectionObserver"in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv);
 if(rm){draw()}else requestAnimationFrame(f)})();</script>
+<script>(function(){function cl(r){if(r.type!==1||r.selectorText.indexOf(":hover")<0)return 0;var k=r.selectorText.split(",").filter(function(x){return x.indexOf(":hover")<0});if(!k.length)return 1;r.selectorText=k.join(",");return 0}
+function strip(){if(!(matchMedia("(hover:none)").matches||innerWidth<=600))return;for(var i=0;i<document.styleSheets.length;i++){var ss=document.styleSheets[i],rs;try{rs=ss.cssRules}catch(e){continue}for(var j=rs.length-1;j>=0;j--){var r=rs[j];try{if(r.type===1){if(cl(r))ss.deleteRule(j)}else if(r.type===4){for(var q=r.cssRules.length-1;q>=0;q--){if(cl(r.cssRules[q]))r.deleteRule(q)}}}catch(e){}}}}
+strip();addEventListener("load",strip)})();</script>
+<script>addEventListener("message",function(e){var d=e.data;if(d&&typeof d.v==="number"){if(d.type==="hero-h")document.documentElement.style.setProperty("--hmh",d.v+"svh");if(d.type==="hero-px")document.documentElement.style.setProperty("--hmh",d.v+"px")}});</script>
 <script>
 (function(){
   document.documentElement.classList.add('js');
@@ -1105,7 +1132,7 @@ o.addEventListener('pointerleave',function(){o.style.setProperty('--sx',0);o.sty
 </script>
 <script>
 (function(){
-var d=document.documentElement;if(!d.classList.contains('intro'))return;
+var d=document.documentElement;if(!d.classList.contains('intro'))return;var DUR=1300;
 var intro=document.getElementById('intro'),typed=document.getElementById('typed'),pct=document.getElementById('pct');
 var txt='Hi, I\u2019m Joe',letters=[],caret=document.createElement('span'),done=false,timers=[],t0=0,raf=0;
 caret.className='caret';
@@ -1116,13 +1143,13 @@ function place(i){var l=letters[i];if(l)caret.style.left=(l.offsetLeft+l.offsetW
 function finish(){if(done)return;done=true;timers.forEach(clearTimeout);cancelAnimationFrame(raf);d.classList.add('hi-in','go');d.classList.remove('intro','nav-in');intro.remove();document.querySelectorAll('.i-fly').forEach(function(x){x.remove()});removeEventListener('keydown',skip);intro.removeEventListener('click',skip)}
 function skip(e){if(e&&e.type==='keydown'&&e.key!=='Escape'&&e.key!==' '&&e.key!=='Enter')return;finish()}
 addEventListener('keydown',skip);intro.addEventListener('click',skip);intro.style.pointerEvents='auto';
-function tick(now){if(done)return;if(!t0)t0=now;var p=Math.min(1,(now-t0)/2100);pct.textContent='Loading '+('00'+Math.round(p*100)).slice(-3)+'%';if(p<1)raf=requestAnimationFrame(tick)}
+function tick(now){if(done)return;if(!t0)t0=now;var p=Math.min(1,(now-t0)/DUR);pct.textContent='Loading '+('00'+Math.round(p*100)).slice(-3)+'%';if(p<1)raf=requestAnimationFrame(tick)}
 function bez(x1,y1,x2,y2){return function(x){if(x<=0)return 0;if(x>=1)return 1;var t=x,i,cx=3*x1,bx=3*(x2-x1)-cx,ax=1-cx-bx,cy=3*y1,by=3*(y2-y1)-cy,ay=1-cy-by;
   for(i=0;i<8;i++){var e=((ax*t+bx)*t+cx)*t-x,d=(3*ax*t+2*bx)*t+cx;if(Math.abs(e)<1e-5)break;if(Math.abs(d)<1e-6)break;t-=e/d}
   return((ay*t+by)*t+cy)*t}}
 var ease=bez(.65,0,.25,1);
 function fly(){
-  if(done)return;scrollTo(0,0);
+  if(done)return;scrollTo(0,0);cancelAnimationFrame(raf);pct.textContent='Loading 100%';
   var lg=intro.querySelector('.i-logo'),nl=document.querySelector('nav .brand .logo'),a=lg.getBoundingClientRect(),n=nl.getBoundingClientRect();
   var W=innerWidth,H=innerHeight,cx=a.left+a.width/2,cy=a.top+a.height/2;
   var pad=Math.max(5,n.height*.24),sW=1.6*Math.max(cx,W-cx)/(a.width/2),sH=1.6*Math.max(cy,H-cy)/(a.height/2);

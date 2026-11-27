@@ -554,7 +554,21 @@ body{overflow-x:clip}
 .ig-n button:disabled{opacity:.35;cursor:default}
 .ig-s video{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#000}
 </style>
-</head>
+<style id="dark-nav">
+/* Navigation matches the dark theme home page: charcoal pill, paper Email me button. */
+.nav-pill{background:rgba(23,25,26,.86)!important;color:#EDEBE6!important;border:1px solid rgba(237,235,230,.16)!important;border-radius:8px!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:none!important}
+.nav-pill a,.nav-pill .brand{color:#fff!important}
+.nav-pill .logo{filter:invert(1) sepia(.12)!important}
+nav>.btn{background:#fff!important;color:#17191A!important;border-radius:8px!important;box-shadow:inset 0 0 0 1px #17191A!important}
+nav>.btn:hover{background:#186154!important;color:#fff!important;box-shadow:inset 0 0 0 1px #186154!important}
+.nav-pill .brand{position:relative!important;top:1.25px!important}
+.nav-pill .brand .logo{position:relative!important;top:-1.25px!important}
+.nav-pill ul{position:relative!important;top:-2px!important}
+</style><style id="dark-foot">
+/* Footer uses the same green photo as the home page hero. */
+.contact{background:#0A2B25 url(assets/hero-bg.webp) center/cover no-repeat!important}
+.contact .foot-video{display:none!important}
+</style></head>
 <body class="cs">
 <script>
 (function(){
@@ -709,5 +723,39 @@ vs.forEach(function(v){io.observe(v)})})();
 </script>
 <style>.pf-back{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:12;display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:12px;background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.22);font:600 11px/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:hover{background:#141414}.pf-back:hover svg{transform:translateX(-3px)}.pf-back svg{transition:transform .3s cubic-bezier(.2,.8,.2,1)}.pf-back:focus-visible{outline:2px solid #fff;outline-offset:2px}@media(max-width:600px){.pf-back{min-height:46px;padding:0 18px}}</style>
 <a class="pf-back" href="portfolio.html#back" aria-label="Back to the portfolio"><svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6H2M6.5 1.5 2 6l4.5 4.5"/></svg>Back</a>
-</body>
+<script id="mp-curtain">
+(function(){
+var M={'the-social-chair.html':['#FE5806','assets/tsc/wordmark.png','clamp(158px,21.75vw,278px)'],
+'kmf-strong.html':['#03034D','assets/kmf/curtain-icon.png','clamp(110px,15vw,190px)'],
+'boston-glove-company.html':['#9E2E2D','assets/bgc/curtain-icon.png','clamp(84px,9.5vw,124px)'],
+'skin-ritual.html':['#000','assets/skin-ritual/curtain-icon-white.png','clamp(120px,16vw,200px)'],
+'five-guys-racing.html':['#F9192A','assets/fg/curtain-icon.png','clamp(120px,16vw,220px)'],
+'starbucks-seafood.html':['#1E3932','assets/sbux/curtain-icon-white.png','clamp(120px,16vw,220px)'],
+'brew-zone.html':['#05ADE1','assets/bz/curtain-icon.png','clamp(120px,16vw,220px)'],
+'lt-electric.html':['#CCFF00','assets/lt/curtain-icon.png','clamp(120px,16vw,220px)'],
+'choice-fitness.html':['#FFE000','assets/cf/curtain-icon.png','clamp(120px,16vw,220px)']};
+document.querySelectorAll('a.mp').forEach(function(a){
+var href=a.getAttribute('href'),m=M[href];if(!m)return;
+a.addEventListener('click',function(e){
+if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
+e.preventDefault();if(a.dataset.go)return;a.dataset.go=1;
+var box=a.querySelector('.mpi')||a,r=box.getBoundingClientRect(),W=innerWidth,H=innerHeight;
+var oc=m[0];if(href==='the-social-chair.html'){try{oc=sessionStorage.getItem('tscOrange')||oc}catch(x){}}
+var o=document.createElement('div');
+o.style.cssText='position:fixed;z-index:400;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;border-radius:'+getComputedStyle(box).borderTopLeftRadius+';background:'+oc+';pointer-events:none';
+o.setAttribute('data-curtain','1');document.body.appendChild(o);void o.offsetWidth;
+var t='.7s cubic-bezier(.7,0,.2,1)';
+o.style.transition='left '+t+',top '+t+',width '+t+',height '+t+',border-radius '+t;
+o.style.left='0px';o.style.top='0px';o.style.width=W+'px';o.style.height=H+'px';o.style.borderRadius='0px';
+var lg=document.createElement('img');lg.src=m[1];lg.alt='';
+lg.style.cssText='position:fixed;z-index:401;left:50%;top:50%;width:'+m[2]+';transform:translate(-50%,-50%);opacity:0;pointer-events:none;transition:opacity .45s ease .2s';
+lg.setAttribute('data-curtain','1');document.body.appendChild(lg);void lg.offsetWidth;lg.style.opacity=1;
+var fin=false,nav=function(){if(fin)return;fin=true;location.href=href+'#from-card'};
+var minw=new Promise(function(r){setTimeout(r,720)});
+var ld=new Promise(function(r){try{fetch(href,{credentials:'same-origin'}).then(function(x){return x.text()}).then(r,r)}catch(x){r()}});
+Promise.all([minw,Promise.race([ld,new Promise(function(r){setTimeout(r,1800)})])]).then(nav);
+});});
+addEventListener('pageshow',function(){document.querySelectorAll('[data-curtain]').forEach(function(x){x.remove()});document.querySelectorAll('a.mp').forEach(function(a){delete a.dataset.go})});
+})();
+</script></body>
 </html>
